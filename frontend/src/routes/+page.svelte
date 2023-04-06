@@ -1,5 +1,6 @@
 <script>
 	import "./semantic-ui-min.css";
+
 	import Gallery from "../components/Gallery.svelte";
 	import Snap from "../components/Snap.svelte";
 	export let snapMode = false;
