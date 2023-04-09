@@ -1,5 +1,7 @@
 <script>
     import {pictures} from '../../lib/stores';
+    export let data;
+    console.log(data)
     </script>
     <svelte:head>
         <title>GALLERY - Sveltebooth</title>

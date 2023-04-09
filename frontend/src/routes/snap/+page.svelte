@@ -1,4 +1,24 @@
 <script>
+
+
+	async function uploadImageToWasabi(file, fileName) {
+	  const params = {
+		Bucket: 'images000001',
+		Key: fileName,
+		Body: file,
+		ContentType: 'image/jpeg',
+		ACL: 'public-read',
+	  };
+	
+	  try {
+		const response = await s3.upload(params).promise();
+		console.log('Image uploaded:', response);
+		return response.Location;
+	  } catch (error) {
+		console.error('Error uploading image:', error);
+	  }
+	}
+	
 	import { error } from '@sveltejs/kit';
 	import { onMount } from 'svelte';
 	let canvas;
@@ -17,7 +37,8 @@
 	};
 	const takePicture = () => {
 		const context = canvas.getContext('2d');
-		context.drawImage(camera, 0, 0, camera.width, camera.height);
+		context.drawImage(camera, 0, 0, canvas.width, canvas.height);
+		uploadImageToWasabi(canvas.toBlob(), "test.png")
 	};
 	onMount(startVideoStream);
 </script>
